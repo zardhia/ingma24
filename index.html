@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, My Love 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loading-petals-container" id="loading-petals"></div>
+  <div class="loading-content">
+    <div class="loading-flower">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <g class="flower-group" transform="translate(60,60)">
+          <ellipse class="petal-svg p1" cx="0" cy="-22" rx="9" ry="18" fill="rgba(255,150,180,0.85)" />
+          <ellipse class="petal-svg p2" cx="16" cy="-16" rx="9" ry="18" fill="rgba(255,150,180,0.75)" transform="rotate(45)"/>
+          <ellipse class="petal-svg p3" cx="22" cy="0" rx="9" ry="18" fill="rgba(255,150,180,0.85)" transform="rotate(90)"/>
+          <ellipse class="petal-svg p4" cx="16" cy="16" rx="9" ry="18" fill="rgba(255,150,180,0.75)" transform="rotate(135)"/>
+          <ellipse class="petal-svg p5" cx="0" cy="22" rx="9" ry="18" fill="rgba(255,150,180,0.85)" transform="rotate(180)"/>
+          <ellipse class="petal-svg p6" cx="-16" cy="16" rx="9" ry="18" fill="rgba(255,150,180,0.75)" transform="rotate(225)"/>
+          <ellipse class="petal-svg p7" cx="-22" cy="0" rx="9" ry="18" fill="rgba(255,150,180,0.85)" transform="rotate(270)"/>
+          <ellipse class="petal-svg p8" cx="-16" cy="-16" rx="9" ry="18" fill="rgba(255,150,180,0.75)" transform="rotate(315)"/>
+          <circle cx="0" cy="0" r="10" fill="#FFD4E8"/>
+        </g>
+      </svg>
+    </div>
+    <p class="loading-text">Preparing something special for you…</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PIN SCREEN -->
+<div id="pin-screen" class="screen hidden">
+  <canvas id="pin-canvas"></canvas>
+  <div class="floating-petals-container" id="pin-petals"></div>
+  <div class="pin-card">
+    <div class="pin-flower-top">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="80">
+        <g transform="translate(40,40)">
+          <ellipse class="p1" cx="0" cy="-14" rx="6" ry="12" fill="rgba(255,150,180,0.9)"/>
+          <ellipse cx="10" cy="-10" rx="6" ry="12" fill="rgba(255,190,215,0.8)" transform="rotate(51.4)"/>
+          <ellipse cx="14" cy="0" rx="6" ry="12" fill="rgba(255,150,180,0.9)" transform="rotate(102.8)"/>
+          <ellipse cx="10" cy="10" rx="6" ry="12" fill="rgba(255,190,215,0.8)" transform="rotate(154.3)"/>
+          <ellipse cx="0" cy="14" rx="6" ry="12" fill="rgba(255,150,180,0.9)" transform="rotate(205.7)"/>
+          <ellipse cx="-10" cy="10" rx="6" ry="12" fill="rgba(255,190,215,0.8)" transform="rotate(257.1)"/>
+          <ellipse cx="-14" cy="0" rx="6" ry="12" fill="rgba(255,150,180,0.9)" transform="rotate(308.6)"/>
+          <circle cx="0" cy="0" r="7" fill="#FFEEF5"/>
+        </g>
+      </svg>
+    </div>
+    <h1 class="pin-title">For You, My Love</h1>
+    <p class="pin-subtitle">Enter our secret code</p>
+    <div class="pin-display">
+      <div class="pin-dot" id="dot-0"></div>
+      <div class="pin-dot" id="dot-1"></div>
+      <div class="pin-dot" id="dot-2"></div>
+      <div class="pin-dot" id="dot-3"></div>
+      <div class="pin-dot" id="dot-4"></div>
+      <div class="pin-dot" id="dot-5"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-btn" data-digit="1">1</button>
+      <button class="pin-btn" data-digit="2">2</button>
+      <button class="pin-btn" data-digit="3">3</button>
+      <button class="pin-btn" data-digit="4">4</button>
+      <button class="pin-btn" data-digit="5">5</button>
+      <button class="pin-btn" data-digit="6">6</button>
+      <button class="pin-btn" data-digit="7">7</button>
+      <button class="pin-btn" data-digit="8">8</button>
+      <button class="pin-btn" data-digit="9">9</button>
+      <button class="pin-btn pin-clear" id="pin-clear-btn">✕</button>
+      <button class="pin-btn" data-digit="0">0</button>
+      <button class="pin-btn pin-submit" id="pin-submit-btn">↩</button>
+    </div>
+    <p class="pin-hint">Hint: our special date 💕</p>
+    <p class="pin-error hidden" id="pin-error">Wrong code, try again sweetheart ✨</p>
+  </div>
+  <div class="pin-success-overlay hidden" id="pin-success"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ GIFT BOX SCREEN -->
+<div id="giftbox-screen" class="screen hidden">
+  <div class="gift-bg-glow"></div>
+  <div class="gift-particles" id="gift-particles"></div>
+  <div class="gift-instruction">
+    <p id="gift-instruction-text">Tap the gift box to open it 🎁</p>
+  </div>
+  <div class="giftbox-wrapper" id="giftbox-wrapper">
+    <div class="giftbox" id="giftbox">
+      <div class="giftbox-lid" id="giftbox-lid">
+        <div class="lid-face lid-top"></div>
+        <div class="lid-face lid-front"></div>
+        <div class="lid-face lid-back"></div>
+        <div class="lid-face lid-left"></div>
+        <div class="lid-face lid-right"></div>
+        <div class="ribbon-h"></div>
+        <div class="ribbon-v"></div>
+        <div class="bow">
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+          <div class="bow-center"></div>
+        </div>
+      </div>
+      <div class="giftbox-body" id="giftbox-body">
+        <div class="body-face body-front"></div>
+        <div class="body-face body-back"></div>
+        <div class="body-face body-left"></div>
+        <div class="body-face body-right"></div>
+        <div class="body-face body-bottom"></div>
+        <div class="body-ribbon-h"></div>
+        <div class="body-ribbon-v"></div>
+        <div class="gift-inner-glow" id="gift-inner-glow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="gift-rays" id="gift-rays"></div>
+  <div class="gift-bloom-container" id="gift-bloom-container"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ MAIN CONTENT -->
+<div id="main-content" class="hidden">
+
+  <!-- Ambient Petals -->
+  <div id="ambient-petals" class="ambient-petals-layer"></div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress-bar"></div>
+
+  <!-- ──── HERO SECTION -->
+  <section id="hero" class="section-hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal-fade">🌸 Your Special Day 🌸</div>
+      <h1 class="hero-title reveal-up">
+        <span class="hero-title-line">Happy</span>
+        <span class="hero-title-line accent-script">Birthday</span>
+        <span class="hero-title-line hero-name">Ciwa</span>
+      </h1>
+      <div class="hero-typewriter reveal-fade" id="hero-typewriter"></div>
+      <div class="hero-divider reveal-fade"></div>
+      <p class="hero-date reveal-fade">June 10 · The most special day</p>
+    </div>
+    <div class="hero-flowers">
+      <div class="h-flower hf1">🌸</div>
+      <div class="h-flower hf2">🌺</div>
+      <div class="h-flower hf3">🌷</div>
+      <div class="h-flower hf4">🌸</div>
+      <div class="h-flower hf5">🌼</div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ──── BOUQUET SECTION -->
+  <section id="bouquet" class="section-bouquet">
+    <div class="section-label reveal-fade">— My First Gift —</div>
+    <h2 class="section-title reveal-up">A Digital Bouquet</h2>
+    <p class="section-subtitle reveal-fade">Each flower holds a little message just for you</p>
+    <div class="bouquet-container reveal-scale" id="bouquet-container">
+      <div class="bouquet-glow-bg"></div>
+      <div class="bouquet-flowers" id="bouquet-flowers">
+        <!-- Flowers rendered by JS -->
+      </div>
+      <div class="bouquet-stem-wrap">
+        <svg class="bouquet-stems" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M150 200 C145 170 130 140 110 100" stroke="#7A9E6A" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M150 200 C150 160 150 130 150 90" stroke="#7A9E6A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M150 200 C155 170 170 140 190 100" stroke="#7A9E6A" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M150 195 C140 165 120 145 95 115" stroke="#7A9E6A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M150 195 C160 165 180 145 205 115" stroke="#7A9E6A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M150 195 C135 160 115 155 85 150" stroke="#7A9E6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M150 195 C165 160 185 155 215 150" stroke="#7A9E6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Leaves -->
+          <ellipse cx="130" cy="145" rx="12" ry="6" fill="#7A9E6A" opacity="0.8" transform="rotate(-30 130 145)"/>
+          <ellipse cx="170" cy="145" rx="12" ry="6" fill="#7A9E6A" opacity="0.8" transform="rotate(30 170 145)"/>
+          <ellipse cx="115" cy="125" rx="10" ry="5" fill="#8AB87A" opacity="0.7" transform="rotate(-45 115 125)"/>
+          <ellipse cx="185" cy="125" rx="10" ry="5" fill="#8AB87A" opacity="0.7" transform="rotate(45 185 125)"/>
+        </svg>
+      </div>
+      <div class="bouquet-ribbon">
+        <div class="ribbon-knot"></div>
+      </div>
+      <div class="bouquet-particles" id="bouquet-particles"></div>
+    </div>
+    <div class="bouquet-message glass-card reveal-fade" id="bouquet-message">
+      <p>Touch each flower to reveal its message 💕</p>
+    </div>
+  </section>
+
+  <!-- ──── LETTER SECTION -->
+  <section id="letter" class="section-letter">
+    <div class="section-label reveal-fade">— From My Heart —</div>
+    <h2 class="section-title reveal-up">A Letter For You</h2>
+    <div class="letter-wrapper reveal-up" id="letter-wrapper">
+      <div class="letter-card" id="letter-card">
+        <div class="letter-corner tl"></div>
+        <div class="letter-corner tr"></div>
+        <div class="letter-corner bl"></div>
+        <div class="letter-corner br"></div>
+        <div class="letter-header">
+          <div class="letter-floral-deco">❀ ✦ ❀</div>
+          <p class="letter-date">June 10</p>
+        </div>
+        <div class="letter-body">
+          <p class="letter-salutation">My dearest Ciwa,</p>
+          <p class="letter-para">On this most special day, I want you to know that every single day with you is a gift beyond measure. You bring light into every corner of my life — even on the darkest days.</p>
+          <p class="letter-para">Your laughter is the most beautiful music I have ever heard. The way you see the world — with wonder and kindness — inspires me every day to become a better person.</p>
+          <p class="letter-para italic">Thank you for being you — with all your uniqueness, the gentleness of your heart, and a spirit that never fades. You are the greatest gift life has ever given me.</p>
+          <p class="letter-para">On this birthday of yours, I wish that all your dreams come true, all your prayers are answered, and all your happiness multiplied tenfold. You deserve every beautiful thing this world has to offer.</p>
+          <div class="letter-ps">
+            <p class="letter-ps-text">P.S. — I will always be here for you, today, tomorrow, and forever 🌸</p>
+          </div>
+        </div>
+        <div class="letter-signature">
+          <p class="letter-closing">With all my love,</p>
+          <p class="letter-name-sig">Ikbal</p>
+          <div class="letter-seal">💕</div>
+        </div>
+        <div class="letter-floral-bottom">✿ ❀ ✿ ❀ ✿</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──── POLAROID MEMORIES SECTION -->
+  <section id="memories" class="section-memories">
+    <div class="section-label reveal-fade">— A Collection of Memories —</div>
+    <h2 class="section-title reveal-up">Our Photo Memories</h2>
+    <p class="section-subtitle reveal-fade">Every picture holds a beautiful story</p>
+    <div class="polaroid-grid" id="polaroid-grid">
+      <!-- Polaroids rendered by JS -->
+    </div>
+    <!-- Photo Modal -->
+    <div class="photo-modal hidden" id="photo-modal">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-polaroid">
+          <div class="modal-photo" id="modal-photo"></div>
+          <div class="modal-caption" id="modal-caption"></div>
+        </div>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──── TIMELINE SECTION -->
+  <section id="timeline" class="section-timeline">
+    <div class="section-label reveal-fade">— Our Journey —</div>
+    <h2 class="section-title reveal-up">Memories We've Written Together</h2>
+    <div class="timeline-container" id="timeline-container">
+      <div class="timeline-vine" id="timeline-vine"></div>
+      <div class="timeline-items" id="timeline-items">
+        <!-- Timeline items rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ──── MUSIC PLAYER SECTION -->
+  <section id="music" class="section-music">
+    <div class="section-label reveal-fade">— Our Songs —</div>
+    <h2 class="section-title reveal-up">Special Playlist</h2>
+    <p class="section-subtitle reveal-fade">Songs that always remind me of you</p>
+    <div class="player-container reveal-up">
+      <div class="player-card glass-card">
+        <div class="player-artwork" id="player-artwork">
+          <div class="artwork-inner" id="artwork-inner">
+            <div class="vinyl-record" id="vinyl-record">
+              <div class="vinyl-center"></div>
+            </div>
+          </div>
+          <div class="artwork-glow"></div>
+        </div>
+        <div class="player-info">
+          <div class="player-track-name" id="player-track-name">Choose a song...</div>
+          <div class="player-artist" id="player-artist">—</div>
+        </div>
+        <div class="visualizer-container" id="visualizer-container">
+          <div class="viz-bars" id="viz-bars"></div>
+        </div>
+        <div class="player-progress-wrap">
+          <div class="player-progress-bg">
+            <div class="player-progress-fill" id="player-progress-fill"></div>
+          </div>
+          <div class="player-times">
+            <span id="time-current">0:00</span>
+            <span id="time-total">0:00</span>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button class="ctrl-btn ctrl-prev" id="ctrl-prev">⏮</button>
+          <button class="ctrl-btn ctrl-play" id="ctrl-play">▶</button>
+          <button class="ctrl-btn ctrl-next" id="ctrl-next">⏭</button>
+        </div>
+      </div>
+      <div class="playlist-list" id="playlist-list">
+        <!-- Playlist rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ──── REASONS JAR SECTION -->
+  <section id="reasons" class="section-reasons">
+    <div class="section-label reveal-fade">— From My Heart To Yours —</div>
+    <h2 class="section-title reveal-up">Reasons I'm Grateful to Know You</h2>
+    <p class="section-subtitle reveal-fade">Shake the jar and pick a note 🫙</p>
+    <div class="jar-wrapper reveal-scale">
+      <div class="reasons-jar" id="reasons-jar">
+        <div class="jar-svg-wrap">
+          <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="jar-svg">
+            <!-- Jar body -->
+            <defs>
+              <linearGradient id="jarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgba(255,225,235,0.15)"/>
+                <stop offset="40%" style="stop-color:rgba(255,240,248,0.25)"/>
+                <stop offset="100%" style="stop-color:rgba(255,225,235,0.1)"/>
+              </linearGradient>
+              <linearGradient id="lidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,150,180,0.6)"/>
+                <stop offset="100%" style="stop-color:rgba(255,100,140,0.4)"/>
+              </linearGradient>
+            </defs>
+            <!-- Lid -->
+            <rect x="60" y="18" width="80" height="28" rx="6" fill="url(#lidGrad)" stroke="rgba(255,150,180,0.5)" stroke-width="1.5"/>
+            <rect x="55" y="40" width="90" height="12" rx="4" fill="rgba(255,120,160,0.5)" stroke="rgba(255,150,180,0.4)" stroke-width="1"/>
+            <!-- Body -->
+            <path d="M55 52 L145 52 L152 240 Q150 252 100 252 Q50 252 48 240 Z" fill="url(#jarGrad)" stroke="rgba(255,180,210,0.3)" stroke-width="1.5"/>
+            <!-- Glass shine -->
+            <path d="M65 60 L70 230" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M78 57 L81 235" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Notes inside (decorative) -->
+            <rect x="70" y="100" width="32" height="22" rx="4" fill="rgba(255,200,220,0.4)" transform="rotate(-8 86 111)"/>
+            <rect x="105" y="130" width="28" height="20" rx="4" fill="rgba(255,220,235,0.35)" transform="rotate(5 119 140)"/>
+            <rect x="75" y="155" width="30" height="21" rx="4" fill="rgba(255,190,215,0.4)" transform="rotate(-4 90 165)"/>
+            <rect x="100" y="90" width="26" height="19" rx="4" fill="rgba(255,205,225,0.35)" transform="rotate(10 113 99)"/>
+            <rect x="72" y="185" width="28" height="18" rx="4" fill="rgba(255,215,230,0.3)" transform="rotate(3 86 194)"/>
+            <rect x="103" y="170" width="25" height="20" rx="4" fill="rgba(255,200,220,0.38)" transform="rotate(-6 115 180)"/>
+          </svg>
+        </div>
+        <div class="jar-shake-btn" id="jar-shake-btn">
+          <span>🫙 Shake the Jar</span>
+        </div>
+      </div>
+      <div class="reason-card-display" id="reason-card-display">
+        <div class="reason-note hidden" id="reason-note">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <p class="note-number" id="note-number">#1</p>
+          <p class="note-text" id="note-text"></p>
+          <div class="note-heart">💕</div>
+        </div>
+      </div>
+    </div>
+    <div class="reasons-counter">
+    </div>
+  </section>
+
+  <!-- ──── FINAL WISH SECTION -->
+  <section id="final-wish" class="section-final">
+    <canvas id="final-canvas"></canvas>
+    <div class="final-flowers-bg" id="final-flowers-bg"></div>
+    <div class="final-lights" id="final-lights"></div>
+    <div class="final-content reveal-up">
+      <div class="final-eyebrow">🌸 With all my heart 🌸</div>
+      <h1 class="final-title">
+        <span>May your life</span>
+        <span class="final-accent">always be filled</span>
+        <span>with flowers</span>
+      </h1>
+      <p class="final-message">Happy birthday, Ciwa. May your days always be filled with love, happiness, and all the beautiful things you deserve. I am grateful every single day to know you.</p>
+      <div class="final-signature">— With love that never runs out 💕 —</div>
+    </div>
+  </section>
+
+</div><!-- end #main-content -->
+
+<!-- ═══════════════════════════════════════════ FIREWORKS OVERLAY -->
+<div id="fireworks-overlay" class="hidden">
+  <canvas id="fireworks-canvas"></canvas>
+  <div class="celebration-rain" id="celebration-rain"></div>
+  <div class="celebration-message" id="celebration-message">
+    <div class="celeb-emoji">🎂</div>
+    <h2>Happy Birthday!</h2>
+    <p>The most special Ciwa 🌸</p>
+    <button class="celeb-close-btn" id="celeb-close-btn">Close ✕</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ FLOATING MUSIC BTN -->
+<button id="music-float-btn" class="music-float-btn hidden" title="Music">
+  <span id="music-float-icon">♪</span>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
